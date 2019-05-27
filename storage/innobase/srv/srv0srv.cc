@@ -2208,6 +2208,7 @@ static void srv_update_cpu_usage() {
  server is active. The second category is of such tasks which are
  performed at some interval e.g.: purge, dict_LRU cleanup etc. */
 static void srv_master_do_active_tasks(void) {
+  // 执行tasks
   ib_time_t cur_time = ut_time();
   uintmax_t counter_time = ut_time_us(NULL);
 
@@ -2221,6 +2222,7 @@ static void srv_master_do_active_tasks(void) {
   /* ALTER TABLE in MySQL requires on Unix that the table handler
   can drop tables lazily after there no longer are SELECT
   queries to them. */
+  // master线程进入执行后台任务
   srv_main_thread_op_info = "doing background drop tables";
   row_drop_tables_for_mysql_in_background();
   MONITOR_INC_TIME_IN_MICRO_SECS(MONITOR_SRV_BACKGROUND_DROP_TABLE_MICROSECOND,
@@ -2543,7 +2545,9 @@ static void srv_master_sleep(void) {
 /** The master thread controlling the server. */
 void srv_master_thread() {
   DBUG_ENTER("srv_master_thread");
-
+  /*
+  *初始化线程，获取线程信息如id等
+  */
   srv_slot_t *slot;
   ulint old_activity_count = srv_get_activity_count();
   ib_time_t last_print_time;
@@ -2562,10 +2566,11 @@ void srv_master_thread() {
 
   last_print_time = ut_time();
 loop:
+  // 如果没有后台进程，挂起等待
   if (srv_force_recovery >= SRV_FORCE_NO_BACKGROUND) {
     goto suspend_thread;
   }
-
+  // 如果线程不处于关闭状态，则进行工作
   while (srv_shutdown_state == SRV_SHUTDOWN_NONE) {
     srv_master_sleep();
 
@@ -2575,15 +2580,28 @@ loop:
     try to avoid asking for troubles because of extra work
     performed in such background thread. */
     srv_main_thread_op_info = "checking free log space";
+    // 确认空闲的log空间
+    // 什么log，如果空间不足，怎么办？
+    // 确认是否有足够的redo日志空间，如果没有就等待?
+    // 有线程会通知吗？释放的时候通知？
+    // 不会通知，而是sleep一段时间然后检查(读取一个原子变量）是否继续等待
     log_free_check();
 
+    // 检查是否有活动任务，如果有则执行
+    // 条件，不等于当前任务数
+    // 什么任务，从哪来的任务，执行多少,
+    // 1. 什么任务？ row_drop_tables_for_mysql_in_background() 清理表，mysql允许延后清理表，这样做可以减少锁争用，提高效率
+    // 2. 合并插入缓存 ibuf_merge_in_background(false)
+    // 3. 更新cpu使用率 srv_update_cpu_usage()
+    // 4. 如果到了LRU清理周期,则清理LRU链表 srv_master_evict_from_table_cache(50)
     if (srv_check_activity(old_activity_count)) {
       old_activity_count = srv_get_activity_count();
       srv_master_do_active_tasks();
     } else {
       srv_master_do_idle_tasks();
     }
-
+    
+    // 暂时不清楚这个步骤有什么意义
     /* Make sure that early encryption processing of UNDO/REDO log is done. */
     if (is_early_redo_undo_encryption_done()) {
       /* Rotate default master key for redo log encryption if it is set */

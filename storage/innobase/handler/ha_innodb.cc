@@ -700,36 +700,36 @@ static PSI_rwlock_info all_innodb_rwlocks[] = {
 performance schema instrumented if "UNIV_PFS_THREAD"
 is defined */
 static PSI_thread_info all_innodb_threads[] = {
-    PSI_KEY(log_archiver_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(page_archiver_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(buf_dump_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(dict_stats_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(io_handler_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(io_ibuf_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(io_log_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(io_read_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(io_write_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(buf_resize_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_writer_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_closer_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_checkpointer_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_flusher_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_write_notifier_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(log_flush_notifier_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(recv_writer_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_error_monitor_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_lock_timeout_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_master_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_monitor_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_purge_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_worker_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(trx_recovery_rollback_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(page_flush_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(page_flush_coordinator_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(fts_optimize_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(fts_parallel_merge_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(fts_parallel_tokenization_thread, 0, 0, PSI_DOCUMENT_ME),
-    PSI_KEY(srv_ts_alter_encrypt_thread, 0, 0, PSI_DOCUMENT_ME)};
+    PSI_KEY(log_archiver_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(page_archiver_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(buf_dump_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(dict_stats_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_handler_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_ibuf_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_log_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_read_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_write_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(buf_resize_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_writer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_closer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_checkpointer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_flusher_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_write_notifier_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(log_flush_notifier_thread, 0, 0, PSI_DOCUMENT_ME),// 未知
+    PSI_KEY(recv_writer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(srv_error_monitor_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(srv_lock_timeout_thread, 0, 0, PSI_DOCUMENT_ME),// 未知
+    PSI_KEY(srv_master_thread, 0, 0, PSI_DOCUMENT_ME), // 主线程
+    PSI_KEY(srv_monitor_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(srv_purge_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(srv_worker_thread, 0, 0, PSI_DOCUMENT_ME),// 未知
+    PSI_KEY(trx_recovery_rollback_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(page_flush_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(page_flush_coordinator_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(fts_optimize_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(fts_parallel_merge_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(fts_parallel_tokenization_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(srv_ts_alter_encrypt_thread, 0, 0, PSI_DOCUMENT_ME)}; // 未知
 #endif /* UNIV_PFS_THREAD */
 
 #ifdef UNIV_PFS_IO
