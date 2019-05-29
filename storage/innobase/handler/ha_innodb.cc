@@ -707,8 +707,8 @@ static PSI_thread_info all_innodb_threads[] = {
     PSI_KEY(io_handler_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(io_ibuf_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(io_log_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
-    PSI_KEY(io_read_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
-    PSI_KEY(io_write_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
+    PSI_KEY(io_read_thread, 0, 0, PSI_DOCUMENT_ME), // 处理aio read的完成通知
+    PSI_KEY(io_write_thread, 0, 0, PSI_DOCUMENT_ME), // 同read
     PSI_KEY(buf_resize_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(log_writer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(log_closer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
@@ -719,7 +719,7 @@ static PSI_thread_info all_innodb_threads[] = {
     PSI_KEY(recv_writer_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(srv_error_monitor_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(srv_lock_timeout_thread, 0, 0, PSI_DOCUMENT_ME),// 未知
-    PSI_KEY(srv_master_thread, 0, 0, PSI_DOCUMENT_ME), // 主线程
+    PSI_KEY(srv_master_thread, 0, 0, PSI_DOCUMENT_ME), // 主线程 drop table 合并插入缓存 更新cpu使用 清楚lru
     PSI_KEY(srv_monitor_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(srv_purge_thread, 0, 0, PSI_DOCUMENT_ME), // 未知
     PSI_KEY(srv_worker_thread, 0, 0, PSI_DOCUMENT_ME),// 未知
